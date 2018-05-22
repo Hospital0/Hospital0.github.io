@@ -1,0 +1,69 @@
+$(document).ready(function(){
+
+	//处理输入框的提示文本
+	$("div.input-box input").on("focus focusout", function(){
+		var thisInput = $(this);
+		var thisLabel = thisInput.next("label");
+
+		if(!thisInput.val() && !thisLabel.text()){
+			var labeldiy = thisInput.attr("label");
+			if(labeldiy){
+				thisLabel.text(labeldiy);
+			}else{
+				switch(thisInput.attr("name")){
+					case "username": thisLabel.text("用户名"); break;
+					case "password": thisLabel.text("密码"); break;
+					case "repassword": thisLabel.text("确认密码"); break;
+					case "email": thisLabel.text("邮箱"); break;
+				}
+			}
+		}else{
+			thisLabel.text("");
+		}
+	});
+
+	//验证用户输入
+	$("form").submit(function(){
+		var isSubmitValid = true;
+		var msg = "";
+
+		var usernameEle = $("#username");
+		var passwordEle = $("#password");
+		var repasswordEle = $("#repassword");
+		var emailEle = $("#email");
+
+		var username = usernameEle.length ? usernameEle.val() : "";
+		var password = passwordEle.length ? passwordEle.val() : "";
+		var repassword = repasswordEle.length ? repasswordEle.val() : "";
+		var email = emailEle.length ? emailEle.val() : "";
+
+		var pattUsername = new RegExp("^[\u4e00-\u9fa50-9A-Za-z_\-]{2,20}$");
+		if(usernameEle.length && !pattUsername.test(username)){
+			msg += "<li>用户名长度应为2~20个字符，且只能包含汉字、字母、数字、'_'、'-'！</li>";
+			isSubmitValid = false;
+		}
+
+		if( passwordEle.length && (password.length < 6 || password.length > 30) ){
+			msg += "<li>密码长度应为6~30个字符！</li>";
+			isSubmitValid = false;
+		}
+
+		if( repasswordEle.length && (password !== repassword) ){
+			msg += "<li>两次输入密码不一致，请重新确认！</li>";
+			isSubmitValid = false;
+		}
+
+		var pattEmail = new RegExp("^([a-z0-9\-]+\.)*[a-z0-9_]+@([a-z0-9\-]+\.)+[a-z]+$", "i");
+		if(emailEle.length && !pattEmail.test(email)){
+			msg += "<li>邮箱格式错误！</li>";
+			isSubmitValid = false;
+		}
+
+		if(!isSubmitValid){
+			$("#msg-error").html("<ul>" + msg + "</ul>");
+			return false;
+		}else{
+			$("#msg-error").html("&nbsp;");
+		}
+	});
+});

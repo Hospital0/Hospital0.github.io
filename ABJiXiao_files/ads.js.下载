@@ -1,0 +1,40 @@
+﻿/*给广告图片加上广告小图*/
+var addCss = {
+    init: function () {
+        if (this.getClass('adContent').length < 1) {
+            return false;
+        }
+        this.creatAdTx(this.getClass('w1'));
+        this.creatAdTx(this.getClass('w2'));
+        this.creatAdTx(this.getClass('w3'));
+        this.creatAdTx(this.getClass('w4'));
+        this.creatAdTx(this.getClass('b1'));
+        this.creatAdTx(this.getClass('b2'));
+        this.creatAdTx(this.getClass('b3'));
+        this.creatAdTx(this.getClass('b4'));
+    },
+    creatAdTx: function (ads) {
+        var adText = '<span>广告</span>'
+        if (ads.length < 1) {
+            return false;
+        }
+        for (var i = 0; i < ads.length; i++) {
+            ads[i].innerHTML = ads[i].innerHTML + adText;
+        }
+    },
+    getClass: function getByClass(sClass, parent) {
+        var aEles = (parent || document).getElementsByTagName('*');
+        var arr = [];
+        for (var i = 0; i < aEles.length; i++) {
+            var aClass = aEles[i].className.split(' ');
+            for (var j = 0; j < aClass.length; j++) {
+                if (aClass[j] == sClass) {
+                    arr.push(aEles[i]);
+                    break;
+                }
+            }
+        }
+        return arr;
+    }
+}
+addCss.init();
