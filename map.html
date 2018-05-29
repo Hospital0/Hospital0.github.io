@@ -1,18 +1,66 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GIhrSjbIK7gtafmwAobyrjuKTXxALfa5"></script>
-
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=C93b5178d7a8ebdb830b9b557abce78b"></script>
+<title>Contact</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Medi Cure Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- toggle menu links -->
+<link href="css/component.css" rel="stylesheet" type="text/css"  />
+<!-- //menu links -->
+<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- effect9 links -->
+<link href="css/ihover.css" rel="stylesheet" media="all">
+<!-- js -->
+<script src="js/jquery-1.11.1.min.js"></script>
+<!-- //js -->
+<link href='#css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<!-- start-smoth-scrolling -->
+		<script type="text/javascript" src="js/move-top.js"></script>
+		<script type="text/javascript" src="js/easing.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+	<!-- start-smoth-scrolling -->
 <title>百度地图的定位</title>
 </head>
 <body>
     <div id="allmap" style="width: 100%;height: 500px;"></div>
-
-
+<div class="contact-info">
+			<form id="submit" onsubmit="alert('您的位置已提交成功')">
+				<input type="text" value=rs.address >
+				<input type="submit" value="发送地址至最近的医院求救">
+			</form>
+</div>
 <script type="text/javascript">
     // 百度地图API功能
     var map = new BMap.Map("allmap");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+  // 添加带有定位的导航控件
+  var navigationControl = new BMap.NavigationControl({
+    // 靠左上角位置
+    anchor: BMAP_ANCHOR_TOP_LEFT,
+    // LARGE类型
+    type: BMAP_NAVIGATION_CONTROL_LARGE,
+    // 启用显示定位
+    enableGeolocation: true
+  });
+  map.addControl(navigationControl);
     var point = new BMap.Point(108.95,34.27);
     map.centerAndZoom(point,12);
 
@@ -28,7 +76,13 @@
             gc.getLocation(point, function(rs){
                var addComp = rs.addressComponents; console.log(rs.address);//地址信息
                alert(rs.address);//弹出所在地址
-
+			var mPoint = new BMap.Point(r.point.lng, r.point.lat);  
+			map.enableScrollWheelZoom();
+			map.centerAndZoom(mPoint,15);
+			var circle = new BMap.Circle(mPoint,1000,{fillColor:"blue", strokeWeight: 1 ,fillOpacity: 0.3, strokeOpacity: 0.3});
+			map.addOverlay(circle);
+			var local =  new BMap.LocalSearch(map, {renderOptions: {map: map, autoViewport: false}});  
+			 local.searchNearby('医院',mPoint,1000);
             });
         }else {
             alert('failed'+this.getStatus());
