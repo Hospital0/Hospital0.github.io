@@ -1016,7 +1016,7 @@ background: rgba(55, 183, 229, 0.42);
 /*--- login --*/
 /*--check-box--*/
 .login-pad{
-	margin:2em 14em 0 0;
+	margin:2em 36em 0 0;
 }
 .login-pad .checkbox input {
 	position: absolute;
@@ -3065,4 +3065,5 @@ margin:0 23px;
     line-height: 1.8em;
     }
 }
+
 /*--//responsive media queries--*/
