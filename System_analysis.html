@@ -99,25 +99,12 @@
 				var option = {
 					tooltip: {
 						trigger: 'axis',
-						/*formatter: function(data){
-				        	//console.log(data)
-				        	 myChart.setOption({
-						        title : {
-							        text: '会员数量' + data.value,
-							    }
-						    });
-							
-						   return data.name + '</br>' + '新增数：' + data.value + '</br>';
-						}*/
+						
 
 					},
 					title: {
-						text: '接诊患者数量：1000',
-						/*subtext: '昨日新增：',
-				        subtextStyle: {
-							fontSize:14,
-							color : '#ff4a84'
-						}*/
+						text: '接诊患者数量',
+						
 					},
 
 					toolbox: {
@@ -283,9 +270,7 @@
 					},
 					tooltip: {
 						trigger: 'axis',
-						/* axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-						    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-						}*/
+					
 					},
 					legend: {
 						data: ['王德文', '张启山', '谭永历', '李江']
@@ -379,11 +364,7 @@
 					},
 					title: {
 						text: '医院问诊情况',
-						/*subtext: '昨日新增：',
-				        subtextStyle: {
-							fontSize:14,
-							color : '#ff4a84'
-						}*/
+						
 					},
 
 					toolbox: {
@@ -594,19 +575,7 @@
 						}
 					];
 					myChart2.setOption(option2, true);
-					/*myChart2.setOption({
-				        series: [
-					        {
-					            data:[
-					                {value:100, name:'准会员'},
-					                {value:310, name:'普通会员'},
-					                {value:234, name:'高级会员'},
-					                {value:135, name:'VIP会员'},
-					                {value:params.value, name:'超级VIP会员'}
-					            ]
-					        }
-					    ]
-				    });*/
+					
 				});
 				myChart4.on('mousemove', function(params) { // 控制台打印数据的名称 
 					$('#my_date_set2').html(params.name)
